@@ -1,8 +1,15 @@
+import { Hero } from "./_components/hero";
+import { Features } from "./_components/features";
+import { Pricing } from "./_components/pricing";
+import { CtaBanner } from "./_components/cta-banner";
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-xl font-bold text-red-400 p-3">Next Supabase SaaS Starter</h1>
-    </div>
+    <>
+      <Hero />
+      <Features />
+      <Pricing />
+      <CtaBanner />
+    </>
   );
 }
