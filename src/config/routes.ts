@@ -6,6 +6,7 @@ export const ROUTES = {
 		LOGIN: '/login',
 		SIGNUP: '/signup',
 		LOGOUT: '/logout',
+		CALLBACK: '/auth/callback',
 	},
 	DASHBOARD: {
 		ADMIN: '/admin',
