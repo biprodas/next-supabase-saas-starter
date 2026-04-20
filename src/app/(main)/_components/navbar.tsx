@@ -3,7 +3,7 @@ import { Button } from "~/components/ui/button";
 import { Logo } from "~/components/logo";
 import { ThemeToggleButton } from "~/components/theme-toggle-button";
 import { ROUTES } from "~/config/routes";
-import { UserButton } from "~/app/(auth)/_components/user-button";
+import { UserButton } from "~/components/user-button";
 import { createClient } from "~/lib/supabase/server";
 
 export async function Navbar() {

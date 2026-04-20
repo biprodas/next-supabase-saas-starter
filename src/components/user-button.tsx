@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type { User } from "@supabase/supabase-js";
+import { BellIcon, CircleUserRoundIcon, CreditCardIcon, LogOut } from "lucide-react";
 import Link from "next/link";
-import { createClient } from "~/lib/supabase/client";
+import { useEffect, useState } from "react";
 import { logout } from "~/app/(auth)/actions";
+import { ThemeSegmentControl } from "~/components/theme-segment-control";
+import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,10 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { Button } from "~/components/ui/button";
-import { LogOut, HomeIcon, UserIcon } from "lucide-react";
-import type { User } from "@supabase/supabase-js";
-import { ThemeSegmentControl } from "~/components/theme-segment-control";
+import { createClient } from "~/lib/supabase/client";
 
 export function UserButton() {
   const [user, setUser] = useState<User | null>(null);
@@ -75,23 +75,29 @@ export function UserButton() {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/profile" className="gap-2 cursor-pointer">
-            <UserIcon className="size-4" />
+            <CircleUserRoundIcon className="size-4" />
             My Profile
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/dashboard" className="gap-2 cursor-pointer">
-            <HomeIcon className="size-4" />
-            Dashboard
+          <Link href="/billing" className="gap-2 cursor-pointer">
+            <CreditCardIcon className="size-4" />
+            Billing
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/notifications" className="gap-2 cursor-pointer">
+            <BellIcon className="size-4" />
+            Notifications
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="gap-2 text-destructive focus:text-destructive cursor-pointer"
+          className="gap-2 cursor-pointer"
           onSelect={() => logout()}
         >
           <LogOut className="size-4" />
-          Sign out
+          Log out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
