@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ThemeSelect } from "~/components/theme-select";
+import { ThemeToggleSelect } from "~/components/theme-toogle-select";
 
 export function DesignSystemHeader() {
   return (
@@ -8,7 +8,7 @@ export function DesignSystemHeader() {
         <Link href="/" className="font-semibold">
           Design System
         </Link>
-        <ThemeSelect />
+        <ThemeToggleSelect />
       </div>
     </header>
   );

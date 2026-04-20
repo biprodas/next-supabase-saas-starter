@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "~/components/logo";
 import { siteConfig } from "~/config/site";
 import { ROUTES } from "~/config/routes";
 import { SUPPORT_CONTACT_EMAIL } from "~/config/constants";
@@ -30,23 +31,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-3">
-            <Link href={ROUTES.HOME} className="flex items-center gap-2">
-              <div className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="size-3.5"
-                >
-                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                </svg>
-              </div>
-              <span className="text-sm font-semibold">{siteConfig.title.split(" ")[0]}</span>
-            </Link>
+            <Logo size="sm" />
             <p className="text-xs text-muted-foreground leading-relaxed max-w-44">
               {siteConfig.description}
             </p>

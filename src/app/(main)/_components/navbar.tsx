@@ -1,31 +1,21 @@
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
+import { Logo } from "~/components/logo";
+import { ThemeToggleButton } from "~/components/theme-toggle-button";
 import { ROUTES } from "~/config/routes";
-import { siteConfig } from "~/config/site";
+import { UserButton } from "~/app/(auth)/_components/user-button";
+import { createClient } from "~/lib/supabase/server";
 
-export function Navbar() {
+export async function Navbar() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href={ROUTES.HOME} className="flex items-center gap-2">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="size-4"
-            >
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-          </div>
-          <span className="font-semibold text-foreground">
-            {siteConfig.title.split(" ")[0]}
-          </span>
-        </Link>
+        <Logo />
 
         <nav className="hidden items-center gap-6 md:flex">
           <Link
@@ -48,14 +38,25 @@ export function Navbar() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" asChild>
-            <Link href={ROUTES.AUTH.LOGIN}>Sign in</Link>
-          </Button>
-          <Button size="sm" asChild>
-            <Link href={ROUTES.AUTH.SIGNUP}>Get started</Link>
-          </Button>
-        </div>
+        {user ? (
+          <div className="flex items-center gap-2">
+            <ThemeToggleButton />
+            <Button size="sm" asChild>
+              <Link href={ROUTES.DASHBOARD.USER}>Dashboard</Link>
+            </Button>
+            <UserButton />
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <ThemeToggleButton />
+            <Button variant="ghost" size="sm" asChild>
+              <Link href={ROUTES.AUTH.LOGIN}>Sign in</Link>
+            </Button>
+            <Button size="sm" asChild>
+              <Link href={ROUTES.AUTH.SIGNUP}>Get started</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   );
